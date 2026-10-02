@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Каталог — Рыжий кот</title>
+  <meta name="description" content="Композиции из воздушных шаров Рыжего кота: цены, фото и заказ с доставкой по Новокузнецку.">
+  <link rel="icon" href="img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Marck+Script&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip" href="#content">К содержанию</a>
+  <header data-header></header>
+  <main id="content">
+    <div class="page-intro">
+      <p class="eyebrow">Каталог</p>
+      <h1>Композиции, которые уже собраны</h1>
+      <p>Цены и фотографии — из магазина Рыжего кота. Надпись на шаре можно заменить, цвет обсудим перед доставкой.</p>
+    </div>
+    <nav class="filters" aria-label="Фильтр">
+      <a href="catalog.html" data-filter="">Все</a>
+      <a href="catalog.html?tag=birthday" data-filter="birthday">День рождения</a>
+      <a href="catalog.html?tag=love" data-filter="love">Любимому</a>
+      <a href="catalog.html?tag=baby" data-filter="baby">Малышу</a>
+      <a href="catalog.html?tag=kids" data-filter="kids">Детям</a>
+      <a href="catalog.html?tag=grad" data-filter="grad">Выпускной</a>
+      <a href="catalog.html?fav=1" data-filter="fav">Избранное</a>
+    </nav>
+    <p class="catalog-note" data-catalog-note></p>
+    <div class="catalog-grid" data-catalog></div>
+  </main>
+  <footer data-footer></footer>
+  <script src="js/site.js"></script>
+</body>
+</html>
