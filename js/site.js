@@ -116,7 +116,10 @@ function toast(text) {
 function updateCartCount() {
   const count = cartItems().reduce((sum, item) => sum + item.qty, 0);
   document.querySelectorAll("[data-cart-count]").forEach((node) => {
-    node.textContent = count ? `Корзина ${count}` : "Корзина";
+    node.textContent = count ? String(count) : "";
+    node.hidden = !count;
+    const link = node.closest("a");
+    if (link) link.setAttribute("aria-label", count ? `Корзина, ${count}` : "Корзина");
   });
 }
 
@@ -133,7 +136,7 @@ function renderHeader() {
   host.className = "site-header";
   host.innerHTML = `
     <a class="brand" href="index.html">
-      <img src="img/logo.jpg" alt="" width="38" height="38">
+      <img src="img/logo.jpg" alt="" width="42" height="42">
       <span><strong>РЫЖИЙ КОТ</strong><small>воздушные шары</small></span>
     </a>
     <div class="menu-panel">
@@ -145,19 +148,43 @@ function renderHeader() {
         ${link("about.html", "О нас")}
         ${link("contacts.html", "Контакты")}
       </nav>
-      <form class="search" action="catalog.html" role="search">
-        <input name="q" type="search" placeholder="Поиск" aria-label="Поиск композиции">
-        <button type="submit">Найти</button>
-      </form>
-      <a class="phone" href="tel:${RK.tel}">${RK.phone}</a>
-      <a class="btn write" href="${RK.vkMe}" target="_blank" rel="noopener">Написать</a>
+      <div class="head-tools">
+        <form class="search" action="catalog.html" role="search">
+          <input name="q" type="search" placeholder="Поиск" aria-label="Поиск композиции">
+          <button type="submit" aria-label="Найти">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
+          </button>
+        </form>
+        <a class="loc" href="contacts.html">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.2"/></svg>
+          <span>Новокузнецк<br>пр. Строителей, д. 41</span>
+        </a>
+        <a class="phone" href="tel:${RK.tel}">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3.8h3.2l1.2 3.2-1.8 1.1a12.5 12.5 0 0 0 5.3 5.3l1.1-1.8 3.2 1.2V16a2 2 0 0 1-2.2 2A16.2 16.2 0 0 1 5 6a2 2 0 0 1 2-2.2z"/></svg>
+          ${RK.phone}
+        </a>
+        <a class="cart-link" href="cart.html">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l-1.2 12H7.2L6 7z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
+          <span class="cart-word">Корзина</span>
+          <span data-cart-count hidden></span>
+        </a>
+        <a class="btn btn-call" href="tel:${RK.tel}">Заказать звонок</a>
+      </div>
     </div>
-    <a class="cart-link" data-cart-count href="cart.html">Корзина</a>
-    <button class="nav-toggle" type="button" aria-expanded="false">Меню</button>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Меню">Меню</button>
   `;
+  const search = host.querySelector(".search");
+  const searchInput = search.querySelector("input");
+  search.querySelector("button").addEventListener("click", (event) => {
+    if (!searchInput.value.trim()) {
+      event.preventDefault();
+      searchInput.focus();
+    }
+  });
   host.querySelector(".nav-toggle").addEventListener("click", () => {
     const open = host.classList.toggle("menu-open");
     host.querySelector(".nav-toggle").setAttribute("aria-expanded", open ? "true" : "false");
+    host.querySelector(".nav-toggle").textContent = open ? "Закрыть" : "Меню";
   });
   updateCartCount();
 }
@@ -369,9 +396,31 @@ function bindOrderForm() {
 function bindHome() {
   const shelf = document.querySelector("[data-shelf]");
   if (!shelf) return;
+  const notes = {
+    16217645: "Набор с шарами",
+    16172485: "Бабл-бокс",
+    16172452: "Выпускной / Детсад",
+    16154089: "Композиция с цифрой",
+    16134970: "Стильный набор"
+  };
   const ids = [16217645, 16172485, 16172452, 16154089, 16134970];
   const items = ids.map((id) => catalog.find((item) => item.id === id)).filter(Boolean);
-  shelf.innerHTML = items.map(goodCard).join("");
+  shelf.innerHTML = items.map((item) => `
+    <article class="pop">
+      <a class="pop-photo" href="product.html?id=${item.id}">
+        <img src="img/products/${esc(item.file)}" alt="${esc(item.title)}">
+      </a>
+      <div class="pop-meta">
+        <div>
+          <strong>${rub(item.price)}</strong>
+          <span>${esc(notes[item.id] || item.title)}</span>
+        </div>
+        <button class="cart-dot" type="button" data-cart="${item.id}" aria-label="В корзину: ${esc(item.title)}">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l-1.2 12H7.2L6 7z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
+        </button>
+      </div>
+    </article>
+  `).join("");
   bindShop(shelf);
 }
 

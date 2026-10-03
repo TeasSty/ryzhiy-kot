@@ -8,7 +8,7 @@
   <link rel="icon" href="img/logo.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Marck+Script&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&family=Manrope:wght@400;500;600;700&family=Marck+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
@@ -17,173 +17,137 @@
   <main id="content">
     <section class="hero">
       <div class="hero-copy">
-        <p class="kicker">Доставка 24/7</p>
+        <p class="hero-kicker">Доставка хорошего настроения 24/7</p>
         <h1>
-          <span>Воздушные шары,</span>
-          <span>которые <em>говорят</em></span>
-          <span>за вас</span>
+          <span class="line-serif">Воздушные<br>шары,</span>
+          <span class="line-script">которые<br>говорят<br>за вас</span>
         </h1>
-        <p class="hero-lead">Стильные композиции, гелиевые шары, оформление праздников и доставка по Новокузнецку.</p>
+        <p class="hero-lead">Стильные композиции, гелиевые шары, оформление праздников и доставка по Новокузнецку — от профессионалов с 14-летним опытом.</p>
         <div class="hero-actions">
-          <a class="btn" href="catalog.html">Выбрать композицию</a>
+          <a class="btn" href="catalog.html">Выбрать композицию <span aria-hidden="true">→</span></a>
           <a class="btn-line" href="solutions.html">Смотреть работы</a>
         </div>
       </div>
       <div class="hero-photo">
-        <img src="img/hero.jpg" alt="Композиция со стеклянным шаром: с днём рождения, мама">
-      </div>
-    </section>
-
-    <section class="occasions">
-      <div class="occasions-copy">
-        <p class="eyebrow">Повод</p>
-        <h2 class="stack-title">
-          <span>Праздник</span>
-          <span>для любого</span>
-          <span>повода</span>
-        </h2>
-        <ul class="occasion-index">
-          <li><a href="catalog.html?tag=birthday">День рождения <em>от 2 150 ₽</em></a></li>
-          <li><a href="catalog.html?tag=love">Любимому человеку <em>от 1 530 ₽</em></a></li>
-          <li><a href="catalog.html?tag=baby">Рождение малыша <em>от 2 500 ₽</em></a></li>
-          <li><a href="catalog.html?tag=kids">Детский праздник <em>от 3 500 ₽</em></a></li>
-          <li><a href="solutions.html#jubilee">Юбилей <em>цифра и облако</em></a></li>
-          <li><a href="solutions.html#grad">Выпускной <em>школа и сад</em></a></li>
-          <li><a href="solutions.html#gender">Гендер-пати <em>соберём сюрприз</em></a></li>
-          <li><a href="decor.html">Корпоратив <em>оформление зала</em></a></li>
-        </ul>
-      </div>
-      <div class="occasion-stage">
-        <a class="occasion-hero" href="catalog.html?tag=love">
-          <img src="img/products/p15997481.jpg" alt="Букет из шаров в руках">
-          <span>Любимому человеку <small>от 1 530 ₽</small></span>
-        </a>
-        <a class="occasion-small occasion-small-a" href="catalog.html?tag=birthday">
-          <img src="img/products/p16217645.jpg" alt="Нежный набор на день рождения">
-          <span>День рождения <small>от 2 150 ₽</small></span>
-        </a>
-        <a class="occasion-small occasion-small-b" href="catalog.html?tag=kids">
-          <img src="img/products/p16042050.jpg" alt="Розовая цифра 3 для детского праздника">
-          <span>Детский праздник <small>от 3 500 ₽</small></span>
-        </a>
-      </div>
-    </section>
-
-    <section class="popular">
-      <div class="popular-head">
-        <div>
-          <p class="eyebrow">Каталог</p>
-          <h2 class="stack-title">Популярные<br>композиции</h2>
+        <img src="img/products/p15997481.jpg" alt="Букет из шаров в руках">
+        <p class="note-script">Делаем<br>праздники<br>ярче</p>
+        <p class="note-chip">Шары с индивидуальной надписью</p>
+        <div class="hero-thumbs" aria-hidden="true">
+          <img src="img/products/p16217645.jpg" alt="">
+          <img src="img/hero.jpg" alt="">
         </div>
-        <a class="btn-line" href="catalog.html">Весь каталог</a>
+      </div>
+    </section>
+
+    <section class="occasions" aria-labelledby="occasions-title">
+      <div class="occasions-title">
+        <h2 id="occasions-title">Праздник<br>для любого<br>повода</h2>
+      </div>
+      <div class="occasion-row">
+        <a class="occasion" href="catalog.html?tag=birthday">
+          <img src="img/products/p16217645.jpg" alt="Нежный набор на день рождения">
+          <span>День рождения <i aria-hidden="true">→</i></span>
+        </a>
+        <a class="occasion" href="catalog.html?tag=baby">
+          <img src="img/products/p16134935.jpg" alt="Голубая композиция с метрикой и мишкой">
+          <span>Рождение малыша <i aria-hidden="true">→</i></span>
+        </a>
+        <a class="occasion" href="catalog.html?tag=love">
+          <img src="img/products/p15039060.jpg" alt="Стеклянный шар с надписью I love you">
+          <span>Любимому человеку <i aria-hidden="true">→</i></span>
+        </a>
+        <a class="occasion" href="catalog.html?tag=kids">
+          <img src="img/products/p16042050.jpg" alt="Розовая цифра 3 для детского праздника">
+          <span>Детские праздники <i aria-hidden="true">→</i></span>
+        </a>
+      </div>
+      <aside class="more">
+        <p>А ещё:</p>
+        <ul>
+          <li><a href="solutions.html#jubilee">Юбилей</a></li>
+          <li><a href="solutions.html#grad">Выпускные</a></li>
+          <li><a href="solutions.html#gender">Гендер-пати</a></li>
+          <li><a href="decor.html">Корпоративы</a></li>
+          <li><a href="decor.html">И любые ваши идеи</a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="popular" aria-labelledby="popular-title">
+      <div class="popular-title">
+        <p class="eyebrow">Каталог</p>
+        <h2 id="popular-title">Популярные<br>композиции</h2>
+        <p class="popular-script">Собрали для вас<br>самое любимое</p>
       </div>
       <div class="shelf" data-shelf></div>
     </section>
 
-    <section class="finder" id="pick">
-      <div class="finder-copy">
-        <p class="eyebrow">Подбор</p>
-        <h2>Не знаете,<br>что выбрать?</h2>
-        <p>Расскажите, для кого подарок, какой повод и примерный бюджет. Мы покажем подходящие композиции из каталога — или соберём свою.</p>
-      </div>
-      <form class="finder-form" action="catalog.html">
-        <label>
-          <span>Для кого</span>
-          <select name="who">
-            <option value="">не важно</option>
-            <option value="mom">маме</option>
-            <option value="love">любимому</option>
-            <option value="baby">малышу</option>
-            <option value="kid">ребёнку</option>
-            <option value="team">коллегам</option>
-          </select>
-        </label>
-        <label>
-          <span>Повод</span>
-          <select name="tag">
-            <option value="">любой</option>
-            <option value="birthday">день рождения</option>
-            <option value="baby">рождение малыша</option>
-            <option value="kids">детский праздник</option>
-            <option value="love">для любимого</option>
-            <option value="grad">выпускной</option>
-          </select>
-        </label>
-        <label>
-          <span>Бюджет</span>
-          <select name="max">
-            <option value="">примерно</option>
-            <option value="2000">до 2 000 ₽</option>
-            <option value="5000">до 5 000 ₽</option>
-            <option value="8000">до 8 000 ₽</option>
-            <option value="8000plus">от 8 000 ₽</option>
-          </select>
-        </label>
-        <button class="btn" type="submit">Подобрать подарок</button>
-      </form>
-    </section>
-
     <section class="events" id="works">
       <div class="events-photo">
-        <img src="img/products/p16172452.jpg" alt="Сиреневая композиция с надписью на стеклянном шаре">
+        <img src="img/products/p15039085.jpg" alt="Большая композиция с цифрой 30 и сердцами в интерьере">
+        <p class="events-script">Сделаем<br>ваш праздник<br>особенным</p>
       </div>
       <div class="events-copy">
+        <div class="events-float">
+          <a class="events-side" href="catalog.html">
+            <img src="img/products/p14874336.jpg" alt="Композиция с облаками и мишкой">
+          </a>
+          <p class="events-note">Реальные<br>наши работы</p>
+        </div>
         <p class="eyebrow">Оформление мероприятия</p>
         <h2>Праздники<br>под ключ</h2>
-        <p>День рождения, свадьба, корпоратив, детский праздник, фотозона или необычная идея. Мы создадим оформление под ваш праздник.</p>
-        <p><a class="btn" href="decor.html">Заказать оформление</a></p>
-        <a class="events-detail" href="catalog.html?tag=baby">
-          <img src="img/products/p16134935.jpg" alt="Голубая композиция с метрикой и мишкой">
-          <span>Выписка и встреча у двери <small>от 2 500 ₽</small></span>
-        </a>
+        <p>Оформим день рождения, свадьбу, корпоратив или детский праздник. Фотозоны, фигуры, шары и декор — всё в едином стиле.</p>
+        <p class="events-action"><a class="btn" href="decor.html">Заказать оформление <span aria-hidden="true">→</span></a></p>
       </div>
     </section>
 
     <section class="why" aria-label="Почему мы">
-      <article>
-        <strong>14+</strong>
-        <span>лет в сфере оформления</span>
+      <article class="fact">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16v10H4z"/><path d="M4 9l2.5-4h11L20 9"/><path d="M12 9v10"/></svg>
+        <p><strong>14+ лет</strong><span>в сфере оформления</span></p>
       </article>
-      <article>
-        <strong>24/7</strong>
-        <span>доставка по городу</span>
+      <article class="fact">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="16" cy="9" r="2.2"/><path d="M3.5 19c.6-2.6 2.8-4 5.5-4s4.9 1.4 5.5 4"/><path d="M14 15.2c1.4-.4 2.8-.2 4.2.8.8.6 1.4 1.6 1.8 3"/></svg>
+        <p><strong>Тысячи</strong><span>счастливых клиентов</span></p>
       </article>
-      <article>
-        <strong>Тысячи</strong>
-        <span>счастливых клиентов</span>
+      <article class="fact">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v8H3z"/><path d="M14 10h4l3 3v2h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>
+        <p><strong>Доставка 24/7</strong><span>по Новокузнецку</span></p>
       </article>
-      <article>
-        <strong>Новокузнецк</strong>
-        <span>пр-т Строителей, 41</span>
+      <article class="fact">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.1 4.4 4.8.7-3.5 3.4.8 4.8L12 14.6 7.8 16.8l.8-4.8L5.1 8.6l4.8-.7z"/></svg>
+        <p><strong>Только</strong><span>качественные шары</span></p>
+      </article>
+      <article class="fact">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 13c2.8-3.2 6.5-2.2 6.5-6A4.2 4.2 0 0 0 12 4a4.2 4.2 0 0 0-6.5 3c0 3.8 3.7 2.8 6.5 6z"/><path d="M12 13.2c-.4 2.2-1.2 4-2.4 6.3"/></svg>
+        <p><strong>Индивидуальные</strong><span>композиции и надписи</span></p>
       </article>
     </section>
 
     <section class="finale">
+      <figure class="finale-photo">
+        <img src="img/hero.jpg" alt="Композиция со стеклянным шаром: с днём рождения, мама">
+        <figcaption class="finale-script">Доставим<br>хорошее<br>настроение!</figcaption>
+      </figure>
       <div class="finale-copy">
-        <div>
-          <h2>Доставим<br>хорошее<br>настроение</h2>
-          <p class="door">прямо к вашей двери.</p>
-        </div>
-        <div class="contact-lines">
-          <div>
-            <dt>Телефон</dt>
-            <dd><a class="phone-big" href="tel:+79133117877">8 (913) 311-78-77</a></dd>
-          </div>
-          <div>
-            <dt>Адрес</dt>
-            <dd>г. Новокузнецк,<br>пр-т Строителей, д. 41</dd>
-          </div>
-          <div>
-            <dt>Заказы</dt>
-            <dd>будни 10:00–19:00<br>выходные 10:00–17:00<br>Доставка круглосуточно.</dd>
-          </div>
+        <p class="eyebrow">Наши контакты</p>
+        <a class="phone-big" href="tel:+79133117877">8 (913) 311-78-77</a>
+        <p class="finale-address">г. Новокузнецк,<br>пр-т Строителей, д. 41</p>
+        <div class="finale-hours">
+          <p>Принимаем заказы:</p>
+          <p>Будни: 10:00–19:00</p>
+          <p>Выходные: 10:00–17:00</p>
+          <p>Доставка — круглосуточно!</p>
         </div>
         <div class="finale-actions">
           <a class="btn btn-vk" href="https://vk.me/redcat42" target="_blank" rel="noopener">Написать в VK</a>
           <a class="btn btn-wa" href="https://wa.me/79133117877" target="_blank" rel="noopener">Написать в WhatsApp</a>
         </div>
       </div>
-      <img src="img/products/p16134970.jpg" alt="Большая композиция: Эммочка, добро пожаловать домой">
+      <div class="finale-map">
+        <iframe title="Карта: проспект Строителей, 41, Новокузнецк" src="https://www.openstreetmap.org/export/embed.html?bbox=87.104%2C53.760%2C87.129%2C53.778&amp;layer=mapnik&amp;marker=53.7689266%2C87.1163590"></iframe>
+        <a href="https://2gis.ru/novokuznetsk/search/%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%20%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D0%B5%D0%B9%2041" target="_blank" rel="noopener">пр. Строителей, 41 · 2ГИС</a>
+      </div>
     </section>
   </main>
   <footer data-footer></footer>
