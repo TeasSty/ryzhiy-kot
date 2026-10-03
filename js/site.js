@@ -96,7 +96,12 @@ function toggleFav(id) {
   document.querySelectorAll(`[data-fav="${id}"]`).forEach((button) => {
     const on = next.includes(id);
     button.setAttribute("aria-pressed", on ? "true" : "false");
-    button.textContent = on ? "В избранном" : "В избранное";
+    button.classList.toggle("is-on", on);
+    if (button.classList.contains("fav")) {
+      button.setAttribute("aria-label", on ? "В избранном" : "В избранное");
+    } else {
+      button.textContent = on ? "В избранном" : "В избранное";
+    }
   });
 }
 
@@ -132,46 +137,45 @@ function renderHeader() {
   const host = document.querySelector("[data-header]");
   if (!host) return;
   const current = pageName();
+  const query = params().get("q") || "";
   const link = (href, label) => `<a href="${href}" ${current === href ? 'aria-current="page"' : ""}>${label}</a>`;
   host.className = "site-header";
   host.innerHTML = `
     <a class="brand" href="index.html">
-      <img src="img/logo.jpg" alt="" width="42" height="42">
+      <img src="img/logo.jpg" alt="" width="44" height="44">
       <span><strong>РЫЖИЙ КОТ</strong><small>воздушные шары</small></span>
     </a>
-    <div class="menu-panel">
-      <nav class="nav" aria-label="Разделы">
-        ${link("catalog.html", "Каталог")}
-        ${link("solutions.html", "Готовые решения")}
-        ${link("decor.html", "Оформление")}
-        ${link("delivery.html", "Доставка")}
-        ${link("about.html", "О нас")}
-        ${link("contacts.html", "Контакты")}
-      </nav>
-      <div class="head-tools">
-        <form class="search" action="catalog.html" role="search">
-          <input name="q" type="search" placeholder="Поиск" aria-label="Поиск композиции">
-          <button type="submit" aria-label="Найти">
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
-          </button>
-        </form>
-        <a class="loc" href="contacts.html">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.2"/></svg>
-          <span>Новокузнецк<br>пр. Строителей, д. 41</span>
-        </a>
-        <a class="phone" href="tel:${RK.tel}">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3.8h3.2l1.2 3.2-1.8 1.1a12.5 12.5 0 0 0 5.3 5.3l1.1-1.8 3.2 1.2V16a2 2 0 0 1-2.2 2A16.2 16.2 0 0 1 5 6a2 2 0 0 1 2-2.2z"/></svg>
-          ${RK.phone}
-        </a>
-        <a class="cart-link" href="cart.html">
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l-1.2 12H7.2L6 7z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
-          <span class="cart-word">Корзина</span>
-          <span data-cart-count hidden></span>
-        </a>
-        <a class="btn btn-call" href="tel:${RK.tel}">Заказать звонок</a>
-      </div>
+    <nav class="nav" aria-label="Разделы">
+      ${link("catalog.html", "Каталог")}
+      ${link("solutions.html", "Готовые решения")}
+      ${link("decor.html", "Оформление")}
+      ${link("delivery.html", "Доставка")}
+      ${link("about.html", "О нас")}
+      ${link("contacts.html", "Контакты")}
+    </nav>
+    <div class="head-tools">
+      <form class="search" action="catalog.html" role="search">
+        <input name="q" type="search" placeholder="Поиск по товарам…" aria-label="Поиск по товарам" value="${esc(query)}">
+        <button type="submit" aria-label="Найти">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg>
+        </button>
+      </form>
+      <a class="phone" href="tel:${RK.tel}">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3.8h3.2l1.2 3.2-1.8 1.1a12.5 12.5 0 0 0 5.3 5.3l1.1-1.8 3.2 1.2V16a2 2 0 0 1-2.2 2A16.2 16.2 0 0 1 5 6a2 2 0 0 1 2-2.2z"/></svg>
+        <span><strong>${RK.phone}</strong><small>Новокузнецк</small></span>
+      </a>
     </div>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Меню">Меню</button>
+    <a class="cart-link" href="cart.html" aria-label="Корзина">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h15l-1.6 8.2a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.5L5.2 4.8H3"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg>
+      <span data-cart-count hidden></span>
+    </a>
+    <a class="btn btn-write" href="${RK.wa}" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12.04 2C6.58 2 2.15 6.4 2.15 11.83c0 1.74.46 3.44 1.34 4.94L2 22l5.39-1.4a10 10 0 0 0 4.65 1.18h.01c5.46 0 9.89-4.4 9.89-9.84C21.94 6.4 17.5 2 12.04 2zm5.76 14.15c-.24.68-1.4 1.25-1.94 1.33-.5.07-1.12.1-1.81-.11-.41-.13-.95-.31-1.64-.61-2.88-1.24-4.76-4.13-4.9-4.32-.14-.19-1.16-1.54-1.16-2.94s.73-2.08 1-2.37c.24-.26.64-.38.86-.38h.62c.2 0 .46-.07.72.55.27.64.91 2.22.99 2.38.08.16.13.35.03.56-.1.21-.16.34-.31.52-.15.18-.32.4-.46.54-.15.15-.3.31-.13.6.17.29.74 1.22 1.59 1.98 1.09.97 2.01 1.27 2.3 1.42.29.15.46.13.63-.07.17-.2.73-.85.92-1.14.19-.29.39-.24.66-.14.27.1 1.71.8 2 .95.29.14.49.21.56.33.07.12.07.7-.17 1.37z"/></svg>
+      Написать
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Меню">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   `;
   const search = host.querySelector(".search");
   const searchInput = search.querySelector("input");
@@ -183,8 +187,9 @@ function renderHeader() {
   });
   host.querySelector(".nav-toggle").addEventListener("click", () => {
     const open = host.classList.toggle("menu-open");
-    host.querySelector(".nav-toggle").setAttribute("aria-expanded", open ? "true" : "false");
-    host.querySelector(".nav-toggle").textContent = open ? "Закрыть" : "Меню";
+    const toggle = host.querySelector(".nav-toggle");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Закрыть меню" : "Меню");
   });
   updateCartCount();
 }
@@ -194,8 +199,25 @@ function renderFooter() {
   if (!host) return;
   host.className = "site-footer";
   host.innerHTML = `
-    <span>Рыжий кот · Новокузнецк, пр-т Строителей, 41</span>
-    <span><a href="tel:${RK.tel}">${RK.phone}</a> · доставка круглосуточно</span>
+    <div class="footer-grid">
+      <a class="brand" href="index.html">
+        <img src="img/logo.jpg" alt="" width="44" height="44">
+        <span><strong>РЫЖИЙ КОТ</strong><small>воздушные шары</small></span>
+      </a>
+      <div>
+        <a class="footer-phone" href="tel:${RK.tel}">${RK.phone}</a>
+        <p>Новокузнецк, пр-т Строителей, 41</p>
+      </div>
+      <div>
+        <p>Будни 10:00–19:00</p>
+        <p>Выходные 10:00–17:00</p>
+        <p>Доставка 24/7</p>
+      </div>
+      <div class="footer-links">
+        <a href="${RK.vk}" target="_blank" rel="noopener">ВКонтакте</a>
+        <a href="${RK.wa}" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
   `;
 }
 
@@ -203,16 +225,18 @@ function goodCard(item) {
   const fav = isFav(item.id);
   return `
     <article class="good">
-      <a href="product.html?id=${item.id}">
-        <img src="img/products/${esc(item.file)}" alt="${esc(item.title)}">
-      </a>
-      <div class="good-meta">
-        <a class="good-name" href="product.html?id=${item.id}">${esc(item.title)}</a>
+      <div class="good-photo">
+        <a href="product.html?id=${item.id}">
+          <img src="img/products/${esc(item.file)}" alt="${esc(item.title)}">
+        </a>
+        <button class="fav${fav ? " is-on" : ""}" type="button" data-fav="${item.id}" aria-pressed="${fav ? "true" : "false"}" aria-label="${fav ? "В избранном" : "В избранное"}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.4s-6.2-3.9-6.2-8.1A3.6 3.6 0 0 1 12 8.2a3.6 3.6 0 0 1 6.2 3.1c0 4.2-6.2 8.1-6.2 8.1z"/></svg>
+        </button>
+      </div>
+      <a class="good-name" href="product.html?id=${item.id}">${esc(item.title)}</a>
+      <div class="good-buy">
         <span class="good-price">${rub(item.price)}</span>
-        <div class="good-actions">
-          <button class="ghost" type="button" data-fav="${item.id}" aria-pressed="${fav ? "true" : "false"}">${fav ? "В избранном" : "В избранное"}</button>
-          <button class="ghost" type="button" data-cart="${item.id}">В корзину</button>
-        </div>
+        <button class="btn" type="button" data-cart="${item.id}">В корзину</button>
       </div>
     </article>
   `;
@@ -284,7 +308,7 @@ function renderStrips() {
     const tag = node.dataset.strip;
     const items = catalog.filter((item) => item.tag === tag).slice(0, 3);
     node.innerHTML = items.map((item) => `
-      <a href="product.html?id=${item.id}">
+      <a class="mini" href="product.html?id=${item.id}">
         <img src="img/products/${esc(item.file)}" alt="${esc(item.title)}">
         <strong>${esc(item.title)}</strong>
         <span>${rub(item.price)}</span>
@@ -393,35 +417,47 @@ function bindOrderForm() {
   });
 }
 
+const HOME_IDS = [16217645, 16172485, 16172452, 16154089, 16134970, 15912755, 16054325, 15039060, 16042050, 12304688, 15983938, 15039070, 16134935];
+const HOME_AUD = {
+  16217645: ["her", "set"],
+  16172485: ["her"],
+  16172452: ["set"],
+  16154089: ["kids", "set"],
+  16134970: ["kids", "set"],
+  15912755: ["her", "set"],
+  16054325: ["him", "set"],
+  15039060: ["her"],
+  16042050: ["kids", "set"],
+  12304688: ["him"],
+  15983938: ["him"],
+  15039070: ["her"],
+  16134935: ["kids", "set"]
+};
+
 function bindHome() {
   const shelf = document.querySelector("[data-shelf]");
-  if (!shelf) return;
-  const notes = {
-    16217645: "Набор с шарами",
-    16172485: "Бабл-бокс",
-    16172452: "Выпускной / Детсад",
-    16154089: "Композиция с цифрой",
-    16134970: "Стильный набор"
+  const pills = document.querySelector("[data-home-filters]");
+  if (!shelf || !pills) return;
+  const paint = (aud) => {
+    const items = HOME_IDS
+      .map((id) => catalog.find((item) => item.id === id))
+      .filter((item) => item && (!aud || (HOME_AUD[item.id] || []).includes(aud)));
+    shelf.innerHTML = items.length
+      ? items.map(goodCard).join("")
+      : `<p>В этой подборке пока нет готовых композиций. Посмотрите <a href="catalog.html">весь каталог</a>.</p>`;
+    bindShop(shelf);
+    pills.querySelectorAll("button").forEach((button) => {
+      const on = (button.dataset.aud || "all") === (aud || "all");
+      button.setAttribute("aria-pressed", on ? "true" : "false");
+    });
   };
-  const ids = [16217645, 16172485, 16172452, 16154089, 16134970];
-  const items = ids.map((id) => catalog.find((item) => item.id === id)).filter(Boolean);
-  shelf.innerHTML = items.map((item) => `
-    <article class="pop">
-      <a class="pop-photo" href="product.html?id=${item.id}">
-        <img src="img/products/${esc(item.file)}" alt="${esc(item.title)}">
-      </a>
-      <div class="pop-meta">
-        <div>
-          <strong>${rub(item.price)}</strong>
-          <span>${esc(notes[item.id] || item.title)}</span>
-        </div>
-        <button class="cart-dot" type="button" data-cart="${item.id}" aria-label="В корзину: ${esc(item.title)}">
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l-1.2 12H7.2L6 7z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
-        </button>
-      </div>
-    </article>
-  `).join("");
-  bindShop(shelf);
+  pills.addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    if (!button) return;
+    const aud = button.dataset.aud || "all";
+    paint(aud === "all" ? "" : aud);
+  });
+  paint("");
 }
 
 async function boot() {
